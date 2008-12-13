@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cml</groupId>
+	<artifactId>inchi</artifactId>
+	<name>JNInchi</name>
+	<version>0.1-SNAPSHOT</version>
+	<description>A Java wrapper for inchi</description>
+	<url>http://sourceforge.net/projects/cml/
+	</url>
+	<inceptionYear>1994</inceptionYear>
+	<mailingLists>
+		<mailingList>
+			<name>cml-discuss</name>
+			<subscribe> http://lists.sourceforge.net/mailman/listinfo/cml-cvs
+			</subscribe>
+			<unsubscribe> http://lists.sourceforge.net/mailman/listinfo/cml-cvs
+			</unsubscribe>
+			<archive> http://sourceforge.net/mailarchive/forum.php?forum_id=44193
+			</archive>
+		</mailingList>
+	</mailingLists>
+	<developers>
+		<developer>
+			<id>petermr</id>
+			<name>Peter Murray-Rust</name>
+		</developer>
+		<developer>
+			<id>sea36</id>
+			<name>Sam Adams</name>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>Artistic License</name>
+			<url> http://www.opensource.org/licenses/artistic-license.php</url>
+			<distribution>manual</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<connection> scm:svn:https://cml.svn.sourceforge.net/svnroot/cml
+		</connection>
+		<developerConnection>
+			scm:svn:https://cml.svn.sourceforge.net/svnroot/cml
+		</developerConnection>
+		<url>http://cml.svn.sourceforge.net/viewvc/cml/
+		</url>
+	</scm>
+	<organization>
+		<name>Peter Murray-Rust</name>
+		<url>http://wwmm.ch.cam.ac.uk/blogs/murrayrust/
+		</url>
+	</organization>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>wwmm</id>
+			<name>WWMM</name>
+			<url>http://wwmm.ch.cam.ac.uk/maven2/
+			</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>cml</groupId>
+			<artifactId>cmlxom</artifactId>
+			<version>2.5.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf</groupId>
+			<artifactId>jniinchi</artifactId>
+			<version>0.5</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.13</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>xom</groupId>
+			<artifactId>xom</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>cml</groupId>
+			<artifactId>jumbo</artifactId>
+			<version>5.5.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<distributionManagement>
+		<repository>
+			<id>wwmm-dav</id>
+			<name>WWMM</name>
+			<url>dav:http://wwmm.ch.cam.ac.uk/maven2
+			</url>
+		</repository>
+	</distributionManagement>
+</project>
