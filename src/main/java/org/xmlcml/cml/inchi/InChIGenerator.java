@@ -407,6 +407,12 @@ public class InChIGenerator implements EuclidConstants, InChIGeneratorInterface 
         lazyGenerate();
         return (output.getReturnStatus());
     }
+    
+    public boolean isOK() {
+    	INCHI_RET ret = getReturnStatus();
+    	return !(INCHI_RET.OKAY.equals(ret));
+	}
+
 
     /**
      * Gets generated InChI string.
