@@ -231,4 +231,32 @@ public class InChIGeneratorTest {
         Assert.assertEquals("InChI=1/CH3/h1H3", inchi);
     }
 
+    /** make the factory at runtime.
+     * 
+     */
+    /**
+     * @throws CMLException
+     */
+
+    @Test
+    public void testInChIWithExplicitHydrogensRuntime() {
+        InChIGeneratorFactory factory = null;
+        try {
+            factory = (InChIGeneratorFactory) Class.forName("org.xmlcml.cml.inchi.InChIGeneratorFactory").newInstance();
+		} catch (Exception e) {
+			throw new RuntimeException("Cannot create Inchi factory", e);
+		}
+        CMLMolecule mol = new CMLMolecule();
+        CMLAtom atom = new CMLAtom("a1");
+        atom.setElementType(AS.C.value);
+        atom.setHydrogenCount("3");
+        atom.setSpinMultiplicity(2);
+        mol.addAtom(atom);
+
+        InChIGenerator gen = factory.getInChIGenerator(mol);
+        String inchi = gen.getInchi();
+
+        Assert.assertEquals("InChI=1/CH3/h1H3", inchi);
+    }
+
 }
