@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.jniinchi.INCHI_BOND_TYPE;
+import net.sf.jniinchi.INCHI_PARITY;
 import net.sf.jniinchi.INCHI_RADICAL;
 import net.sf.jniinchi.INCHI_RET;
 import net.sf.jniinchi.JniInchiAtom;
@@ -14,12 +15,16 @@ import net.sf.jniinchi.JniInchiBond;
 import net.sf.jniinchi.JniInchiException;
 import net.sf.jniinchi.JniInchiInput;
 import net.sf.jniinchi.JniInchiOutput;
+import net.sf.jniinchi.JniInchiStereo0D;
 import net.sf.jniinchi.JniInchiWrapper;
 import nu.xom.Text;
 
 import org.xmlcml.cml.base.CMLElement;
+import org.xmlcml.cml.base.CMLElements;
 import org.xmlcml.cml.element.CMLAtom;
+import org.xmlcml.cml.element.CMLAtomParity;
 import org.xmlcml.cml.element.CMLBond;
+import org.xmlcml.cml.element.CMLBondStereo;
 import org.xmlcml.cml.element.CMLIdentifier;
 import org.xmlcml.cml.element.CMLMolecule;
 import org.xmlcml.euclid.EuclidConstants;
@@ -34,10 +39,10 @@ import org.xmlcml.molutil.ChemicalElement.AS;
  * If the molecule has 3D coordinates for all of its atoms then they will be
  * used, otherwise 2D coordinates will be used if available.
  *
+ * Bond stereochemistry and atom parities are supported :-)
+ * If 3D coordinates are available then the bond stereochemistry and atom parities
+ * should be ignored by InChI.
  * <p>
- * Bond stereochemistry and atom parities are not currently processed. If 3D
- * coordinates are available then the bond stereochemistry and atom parities
- * would be ignored by InChI anyway.
  *
  * <p>
  *
@@ -68,13 +73,10 @@ import org.xmlcml.molutil.ChemicalElement.AS;
  * <code>String auxinfo = gen.getAuxInfo();</code><br>
  *
  * <p>
- * <tt><b>
- * TODO: bond stereochemistry<br>
- * TODO: atom parities.
- * </b></tt>
  *
  * @author Sam Adams
  * @author Jim Downing
+ * @author Daniel Lowe (stereochemistry)
  *
  * @since 5.3
  */
@@ -324,6 +326,22 @@ public class InChIGenerator implements EuclidConstants, InChIGeneratorInterface 
             iatom.setImplicitH(hcount);
         }
 
+        for (CMLAtom atom : atoms) {//add atomParities
+        	CMLElements<CMLAtomParity> atomParities = atom.getAtomParityElements();//expect none or 1
+        	for (CMLAtomParity atomParity : atomParities) {
+				CMLAtom[] atomRefs4 = atomParity.getAtomRefs4(molecule);
+				if (atomRefs4 != null){
+					INCHI_PARITY parity =INCHI_PARITY.UNKNOWN;
+					if (atomParity.getIntegerValue() > 0){
+						parity =INCHI_PARITY.EVEN;
+					}
+					else if (atomParity.getIntegerValue() < 0){
+						parity =INCHI_PARITY.ODD;
+					}
+					input.addStereo0D(JniInchiStereo0D.createNewTetrahedralStereo0D(atomMap.get(atom), atomMap.get(atomRefs4[0]), atomMap.get(atomRefs4[1]), atomMap.get(atomRefs4[2]), atomMap.get(atomRefs4[3]), parity));
+				}
+			}
+        }
 
         if (optionsContains(ProcessingOptions.USE_BONDS)) {
             // Process bonds
@@ -355,9 +373,27 @@ public class InChIGenerator implements EuclidConstants, InChIGeneratorInterface 
 
                 input.addBond(new JniInchiBond(at0, at1, order));
             }
-
-            // TODO: Stereo chemistry
         }
+        
+        for (CMLBond bond : bonds) {//add bondStereos
+        	CMLElements<CMLBondStereo> bondStereos = bond.getBondStereoElements();//expect none or 1
+        	for (CMLBondStereo bondStereo : bondStereos) {
+				String[] atomRefs4Ids = bondStereo.getAtomRefs4();
+				List<JniInchiAtom> jniAtoms = new ArrayList<JniInchiAtom>();
+				for (String atomRefId : atomRefs4Ids) {
+					jniAtoms.add(atomMap.get(molecule.getAtomById(atomRefId)));
+				}
+				if (jniAtoms.size()==4){
+					if (CMLBond.CIS.equals(bondStereo.getXMLContent())){
+						input.addStereo0D(JniInchiStereo0D.createNewDoublebondStereo0D(jniAtoms.get(0), jniAtoms.get(1), jniAtoms.get(2), jniAtoms.get(3), INCHI_PARITY.ODD));
+					}
+					else if (CMLBond.TRANS.equals(bondStereo.getXMLContent())){
+						input.addStereo0D(JniInchiStereo0D.createNewDoublebondStereo0D(jniAtoms.get(0), jniAtoms.get(1), jniAtoms.get(2), jniAtoms.get(3), INCHI_PARITY.EVEN));
+					}
+				}
+			}
+        }
+
         try {
             output = JniInchiWrapper.getInchi(input);
         } catch (JniInchiException jie) {
@@ -410,7 +446,10 @@ public class InChIGenerator implements EuclidConstants, InChIGeneratorInterface 
     
     public boolean isOK() {
     	INCHI_RET ret = getReturnStatus();
-    	return !(INCHI_RET.OKAY.equals(ret));
+    	if (INCHI_RET.OKAY.equals(ret) || INCHI_RET.WARNING.equals(ret)){
+    		return true;
+    	}
+    	return false;
 	}
 
 

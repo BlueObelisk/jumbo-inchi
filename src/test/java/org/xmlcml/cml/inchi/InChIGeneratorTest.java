@@ -9,7 +9,9 @@ import net.sf.jniinchi.INCHI_RET;
 import org.junit.Assert;
 import org.junit.Test;
 import org.xmlcml.cml.element.CMLAtom;
+import org.xmlcml.cml.element.CMLAtomParity;
 import org.xmlcml.cml.element.CMLBond;
+import org.xmlcml.cml.element.CMLBondStereo;
 import org.xmlcml.cml.element.CMLMolecule;
 import org.xmlcml.euclid.Point3;
 import org.xmlcml.molutil.ChemicalElement.AS;
@@ -257,6 +259,98 @@ public class InChIGeneratorTest {
         String inchi = gen.getInchi();
 
         Assert.assertEquals("InChI=1/CH3/h1H3", inchi);
+    }
+    
+    @Test
+    public void testBondStereo() {
+        InChIGeneratorFactory factory = new InChIGeneratorFactory();
+        CMLMolecule mol = new CMLMolecule();// C/C=C\C (2Z)-but-2-ene
+        CMLAtom a1 = new CMLAtom("a1");
+        a1.setElementType(AS.C.value);
+        a1.setHydrogenCount(3);
+        CMLAtom a2 = new CMLAtom("a2");
+        a2.setElementType(AS.C.value);
+        a2.setHydrogenCount(1);
+        CMLAtom a3 = new CMLAtom("a3");
+        a3.setElementType(AS.C.value);
+        a3.setHydrogenCount(1);
+        CMLAtom a4 = new CMLAtom("a4");
+        a4.setElementType(AS.C.value);
+        a4.setHydrogenCount(3);
+        
+        mol.addAtom(a1);
+        mol.addAtom(a2);
+        mol.addAtom(a3);
+        mol.addAtom(a4);
+        
+        CMLBond b0 = new CMLBond(a1, a2);
+        b0.setOrder(CMLBond.SINGLE);
+        mol.addBond(b0);
+        CMLBond b1 = new CMLBond(a2, a3);
+        b1.setOrder(CMLBond.DOUBLE);
+        mol.addBond(b1);
+        CMLBond b2 = new CMLBond(a3, a4);
+        b2.setOrder(CMLBond.SINGLE);
+        mol.addBond(b2);
+        
+        CMLBondStereo bondStereo = new CMLBondStereo();
+        bondStereo.setAtomRefs4("a1 a2 a3 a4");
+        bondStereo.setXMLContent("C");
+        b1.addBondStereo(bondStereo);
+
+        InChIGenerator gen = factory.getInChIGenerator(mol);
+        String inchi = gen.getInchi();
+
+        Assert.assertEquals("InChI=1/C4H8/c1-3-4-2/h3-4H,1-2H3/b4-3-", inchi);
+    }
+    
+    @Test
+    public void testAtomParity() {
+        InChIGeneratorFactory factory = new InChIGeneratorFactory();
+        CMLMolecule mol = new CMLMolecule();//F[C@H](Br)Cl (1S)-bromochlorofluoromethane
+        CMLAtom a1 = new CMLAtom("a1");
+        a1.setElementType(AS.C.value);
+        a1.setHydrogenCount(1);
+        CMLAtom a2 = new CMLAtom("a2");
+        a2.setElementType(AS.Br.value);
+        a2.setHydrogenCount(0);
+        CMLAtom a3 = new CMLAtom("a3");
+        a3.setElementType(AS.Cl.value);
+        a3.setHydrogenCount(0);
+        CMLAtom a4 = new CMLAtom("a4");
+        a4.setElementType(AS.F.value);
+        a4.setHydrogenCount(0);
+        CMLAtom a5 = new CMLAtom("a5");
+        a5.setElementType(AS.H.value);
+        a5.setHydrogenCount(0);
+        
+        mol.addAtom(a1);
+        mol.addAtom(a2);
+        mol.addAtom(a3);
+        mol.addAtom(a4);
+        mol.addAtom(a5);
+        
+        CMLBond b0 = new CMLBond(a1, a2);
+        b0.setOrder(CMLBond.SINGLE);
+        mol.addBond(b0);
+        CMLBond b1 = new CMLBond(a1, a3);
+        b1.setOrder(CMLBond.SINGLE);
+        mol.addBond(b1);
+        CMLBond b2 = new CMLBond(a1, a4);
+        b2.setOrder(CMLBond.SINGLE);
+        mol.addBond(b2);
+        CMLBond b3 = new CMLBond(a1, a5);
+        b3.setOrder(CMLBond.SINGLE);
+        mol.addBond(b3);
+        
+        CMLAtomParity atomParity = new CMLAtomParity();//should be S
+        atomParity.setAtomRefs4("a5 a2 a3 a4");
+        atomParity.setXMLContent(1);
+        a1.addAtomParity(atomParity);
+
+        InChIGenerator gen = factory.getInChIGenerator(mol);
+        String inchi = gen.getInchi();
+        Assert.assertEquals("InChI=1/CHBrClF/c2-1(3)4/h1H/t1-/m1/s1", inchi);
     }
 
 }
