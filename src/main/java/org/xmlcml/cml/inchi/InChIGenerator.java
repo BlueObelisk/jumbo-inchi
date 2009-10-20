@@ -379,6 +379,9 @@ public class InChIGenerator implements EuclidConstants, InChIGeneratorInterface 
         	CMLElements<CMLBondStereo> bondStereos = bond.getBondStereoElements();//expect none or 1
         	for (CMLBondStereo bondStereo : bondStereos) {
 				String[] atomRefs4Ids = bondStereo.getAtomRefs4();
+				if(atomRefs4Ids==null){
+					continue;
+				}
 				List<JniInchiAtom> jniAtoms = new ArrayList<JniInchiAtom>();
 				for (String atomRefId : atomRefs4Ids) {
 					jniAtoms.add(atomMap.get(molecule.getAtomById(atomRefId)));
