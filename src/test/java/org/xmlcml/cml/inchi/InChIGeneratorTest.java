@@ -140,13 +140,13 @@ public class InChIGeneratorTest {
 		CMLMolecule lAlanine = getLAlanineInput();
 		InChIGenerator gen = factory.getInChIGenerator(lAlanine);
 		Assert.assertEquals(gen.getReturnStatus(), INCHI_RET.OKAY);
-		Assert.assertEquals(gen.getInchi(), "InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/m0/s1");
+		Assert.assertEquals(gen.getInchi(), "InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/m0/s1");
 		Assert.assertEquals(gen.getAuxInfo(), "AuxInfo=1/1/N:4,1,2,3,5,6/E:(5,6)/it:im/rA:6CCNCOO/rB:s1;s1;s1;d2;s2;/rC:-.358,.819,20.655;-1.598,-.032,20.905;-.275,2.014,21.574;.952,.043,20.838;-2.678,.479,21.093;-1.596,-1.239,20.958;");
 
 		CMLMolecule rAlanine = getRAlanineInput();
 		gen = factory.getInChIGenerator(rAlanine);
 		Assert.assertEquals(gen.getReturnStatus(), INCHI_RET.OKAY);
-		Assert.assertEquals(gen.getInchi(), "InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/m1/s1");
+		Assert.assertEquals(gen.getInchi(), "InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/m1/s1");
 		Assert.assertEquals(gen.getAuxInfo(), "AuxInfo=1/1/N:4,1,2,3,5,6/E:(5,6)/it:im/rA:6CCNCOO/rB:s1;s1;s1;d2;s2;/rC:.358,.819,20.655;1.598,-.032,20.905;.275,2.014,21.574;-.952,.043,20.838;2.678,.479,21.093;1.596,-1.239,20.958;");
 	}
 
@@ -164,11 +164,10 @@ public class InChIGeneratorTest {
 		Assert.assertEquals(gen.getInchi(), "InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/s2");
 		Assert.assertEquals(gen.getAuxInfo(), "AuxInfo=1/1/N:4,1,2,3,5,6/E:(5,6)/rA:6CCNCOO/rB:s1;s1;s1;d2;s2;/rC:-.358,.819,20.655;-1.598,-.032,20.905;-.275,2.014,21.574;.952,.043,20.838;-2.678,.479,21.093;-1.596,-1.239,20.958;");
 
-		CMLMolecule rAlanine = getRAlanineInput();
-		gen = factory.getInChIGenerator(rAlanine, "/cOmPRess");
+		gen = factory.getInChIGenerator(lAlanine, "/sNON");
 		Assert.assertEquals(gen.getReturnStatus(), INCHI_RET.OKAY);
-		Assert.assertEquals(gen.getInchi(), "InChI=1/C3H7NO2/cABBCC/hB1D2A3,1EF/tB1/m1/s1");
-		Assert.assertEquals(gen.getAuxInfo(), "AuxInfo=1/1/N:DABCEF/E:EF/it:im/rA:6CCNCOO/rB:s1;s1;s1;d2;s2;/rC:.358,.819,20.655;1.598,-.032,20.905;.275,2.014,21.574;-.952,.043,20.838;2.678,.479,21.093;1.596,-1.239,20.958;");
+		Assert.assertEquals(gen.getInchi(), "InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)");
+		Assert.assertEquals(gen.getAuxInfo(), "AuxInfo=1/1/N:4,1,2,3,5,6/E:(5,6)/rA:6CCNCOO/rB:s1;s1;s1;d2;s2;/rC:-.358,.819,20.655;-1.598,-.032,20.905;-.275,2.014,21.574;.952,.043,20.838;-2.678,.479,21.093;-1.596,-1.239,20.958;");
 	}
 
 	/** Test method for 'org.xmlcml.cml.inchi.InChIGenerator.InChIGenerator(CMLMolecule, List)'
@@ -186,13 +185,12 @@ public class InChIGeneratorTest {
 		Assert.assertEquals(gen.getInchi(), "InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/s2");
 		Assert.assertEquals(gen.getAuxInfo(), "AuxInfo=1/1/N:4,1,2,3,5,6/E:(5,6)/rA:6CCNCOO/rB:s1;s1;s1;d2;s2;/rC:-.358,.819,20.655;-1.598,-.032,20.905;-.275,2.014,21.574;.952,.043,20.838;-2.678,.479,21.093;-1.596,-1.239,20.958;");
 
-		CMLMolecule rAlanine = getRAlanineInput();
 		ops = new ArrayList<INCHI_OPTION>();
-		ops.add(INCHI_OPTION.Compress);
-		gen = factory.getInChIGenerator(rAlanine, ops);
+		ops.add(INCHI_OPTION.SNon);
+		gen = factory.getInChIGenerator(lAlanine, ops);
 		Assert.assertEquals(gen.getReturnStatus(), INCHI_RET.OKAY);
-		Assert.assertEquals(gen.getInchi(), "InChI=1/C3H7NO2/cABBCC/hB1D2A3,1EF/tB1/m1/s1");
-		Assert.assertEquals(gen.getAuxInfo(), "AuxInfo=1/1/N:DABCEF/E:EF/it:im/rA:6CCNCOO/rB:s1;s1;s1;d2;s2;/rC:.358,.819,20.655;1.598,-.032,20.905;.275,2.014,21.574;-.952,.043,20.838;2.678,.479,21.093;1.596,-1.239,20.958;");
+		Assert.assertEquals(gen.getInchi(), "InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)");
+		Assert.assertEquals(gen.getAuxInfo(), "AuxInfo=1/1/N:4,1,2,3,5,6/E:(5,6)/rA:6CCNCOO/rB:s1;s1;s1;d2;s2;/rC:-.358,.819,20.655;-1.598,-.032,20.905;-.275,2.014,21.574;.952,.043,20.838;-2.678,.479,21.093;-1.596,-1.239,20.958;");
 	}
 
 
@@ -210,7 +208,7 @@ public class InChIGeneratorTest {
         InChIGenerator gen = factory.getInChIGenerator(mol);
         String inchi = gen.getInchi();
 
-        Assert.assertEquals("InChI=1/CH4/h1H4", inchi);
+        Assert.assertEquals("InChI=1S/CH4/h1H4", inchi);
     }
     
     /**
@@ -230,7 +228,7 @@ public class InChIGeneratorTest {
         InChIGenerator gen = factory.getInChIGenerator(mol);
         String inchi = gen.getInchi();
 
-        Assert.assertEquals("InChI=1/CH3/h1H3", inchi);
+        Assert.assertEquals("InChI=1S/CH3/h1H3", inchi);
     }
 
     /** make the factory at runtime.
@@ -258,7 +256,7 @@ public class InChIGeneratorTest {
         InChIGenerator gen = factory.getInChIGenerator(mol);
         String inchi = gen.getInchi();
 
-        Assert.assertEquals("InChI=1/CH3/h1H3", inchi);
+        Assert.assertEquals("InChI=1S/CH3/h1H3", inchi);
     }
     
     @Test
@@ -301,7 +299,7 @@ public class InChIGeneratorTest {
         InChIGenerator gen = factory.getInChIGenerator(mol);
         String inchi = gen.getInchi();
 
-        Assert.assertEquals("InChI=1/C4H8/c1-3-4-2/h3-4H,1-2H3/b4-3-", inchi);
+        Assert.assertEquals("InChI=1S/C4H8/c1-3-4-2/h3-4H,1-2H3/b4-3-", inchi);
     }
     
     @Test
@@ -350,7 +348,7 @@ public class InChIGeneratorTest {
 
         InChIGenerator gen = factory.getInChIGenerator(mol);
         String inchi = gen.getInchi();
-        Assert.assertEquals("InChI=1/CHBrClF/c2-1(3)4/h1H/t1-/m1/s1", inchi);
+        Assert.assertEquals("InChI=1S/CHBrClF/c2-1(3)4/h1H/t1-/m1/s1", inchi);
     }
 
 }
