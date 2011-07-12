@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>uk.ac.cam.ch.wwmm</groupId>
+		<artifactId>wwmm-parent</artifactId>
+		<version>4</version>
+	</parent>
 	<groupId>cml</groupId>
 	<artifactId>inchi</artifactId>
 	<name>JNInchi</name>
@@ -29,6 +35,10 @@
 			<id>sea36</id>
 			<name>Sam Adams</name>
 		</developer>
+		<developer>
+			<id>dmj30</id>
+			<name>David Jessop</name>
+		</developer>
 	</developers>
 	<licenses>
 		<license>
@@ -38,46 +48,20 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection> scm:svn:https://cml.svn.sourceforge.net/svnroot/cml
-		</connection>
-		<developerConnection>
-			scm:svn:https://cml.svn.sourceforge.net/svnroot/cml
-		</developerConnection>
-		<url>http://cml.svn.sourceforge.net/viewvc/cml/
-		</url>
+		<url>https://bitbucket.org/wwmm/jumbo-inchi/src</url>
+		<connection>scm:hg:http://bitbucket.org/wwmm/jumbo-inchi</connection>
+		<developerConnection>scm:hg:https://bitbucket.org/wwmm/jumbo-inchi</developerConnection>
 	</scm>
 	<organization>
 		<name>Peter Murray-Rust</name>
 		<url>http://wwmm.ch.cam.ac.uk/blogs/murrayrust/
 		</url>
 	</organization>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 	<repositories>
 		<repository>
-			<id>wwmm</id>
-			<name>WWMM</name>
-			<url>http://wwmm.ch.cam.ac.uk/maven2/
-			</url>
+			<id>ucc-repo</id>
+			<name>UCC Repository</name>
+			<url>https://maven.ch.cam.ac.uk/m2repo</url>
 		</repository>
 	</repositories>
 	<dependencies>
@@ -101,7 +85,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.0</version>
-			<scope>compile</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -120,12 +104,4 @@
 			<version>2.8.0</version>
 		</dependency>
 	</dependencies>
-	<distributionManagement>
-		<repository>
-			<id>wwmm-dav</id>
-			<name>WWMM</name>
-			<url>dav:http://wwmm.ch.cam.ac.uk/maven2
-			</url>
-		</repository>
-	</distributionManagement>
 </project>
