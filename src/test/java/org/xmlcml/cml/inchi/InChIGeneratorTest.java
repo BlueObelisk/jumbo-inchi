@@ -58,19 +58,19 @@ public class InChIGeneratorTest {
         molecule.addAtom(a6);
 
         CMLBond b0 = new CMLBond(a1, a2);
-        b0.setOrder(CMLBond.SINGLE);
+        b0.setOrder(CMLBond.SINGLE_S);
         molecule.addBond(b0);
         CMLBond b1 = new CMLBond(a1, a3);
-        b1.setOrder(CMLBond.SINGLE);
+        b1.setOrder(CMLBond.SINGLE_S);
         molecule.addBond(b1);
         CMLBond b2 = new CMLBond(a1, a4);
-        b2.setOrder(CMLBond.SINGLE);
+        b2.setOrder(CMLBond.SINGLE_S);
         molecule.addBond(b2);
         CMLBond b3 = new CMLBond(a2, a5);
-        b3.setOrder(CMLBond.DOUBLE);
+        b3.setOrder(CMLBond.DOUBLE_D);
         molecule.addBond(b3);
         CMLBond b4 = new CMLBond(a2, a6);
-        b4.setOrder(CMLBond.SINGLE);
+        b4.setOrder(CMLBond.SINGLE_S);
         molecule.addBond(b4);
 
     	return(molecule);
@@ -111,19 +111,19 @@ public class InChIGeneratorTest {
         molecule.addAtom(a6);
 
         CMLBond b0 = new CMLBond(a1, a2);
-        b0.setOrder(CMLBond.SINGLE);
+        b0.setOrder(CMLBond.SINGLE_S);
         molecule.addBond(b0);
         CMLBond b1 = new CMLBond(a1, a3);
-        b1.setOrder(CMLBond.SINGLE);
+        b1.setOrder(CMLBond.SINGLE_S);
         molecule.addBond(b1);
         CMLBond b2 = new CMLBond(a1, a4);
-        b2.setOrder(CMLBond.SINGLE);
+        b2.setOrder(CMLBond.SINGLE_S);
         molecule.addBond(b2);
         CMLBond b3 = new CMLBond(a2, a5);
-        b3.setOrder(CMLBond.DOUBLE);
+        b3.setOrder(CMLBond.DOUBLE_D);
         molecule.addBond(b3);
         CMLBond b4 = new CMLBond(a2, a6);
-        b4.setOrder(CMLBond.SINGLE);
+        b4.setOrder(CMLBond.SINGLE_S);
         molecule.addBond(b4);
 
     	return(molecule);
@@ -283,13 +283,13 @@ public class InChIGeneratorTest {
         mol.addAtom(a4);
         
         CMLBond b0 = new CMLBond(a1, a2);
-        b0.setOrder(CMLBond.SINGLE);
+        b0.setOrder(CMLBond.SINGLE_S);
         mol.addBond(b0);
         CMLBond b1 = new CMLBond(a2, a3);
-        b1.setOrder(CMLBond.DOUBLE);
+        b1.setOrder(CMLBond.DOUBLE_D);
         mol.addBond(b1);
         CMLBond b2 = new CMLBond(a3, a4);
-        b2.setOrder(CMLBond.SINGLE);
+        b2.setOrder(CMLBond.SINGLE_S);
         mol.addBond(b2);
         
         CMLBondStereo bondStereo = new CMLBondStereo();
@@ -330,16 +330,16 @@ public class InChIGeneratorTest {
         mol.addAtom(a5);
         
         CMLBond b0 = new CMLBond(a1, a2);
-        b0.setOrder(CMLBond.SINGLE);
+        b0.setOrder(CMLBond.SINGLE_S);
         mol.addBond(b0);
         CMLBond b1 = new CMLBond(a1, a3);
-        b1.setOrder(CMLBond.SINGLE);
+        b1.setOrder(CMLBond.SINGLE_S);
         mol.addBond(b1);
         CMLBond b2 = new CMLBond(a1, a4);
-        b2.setOrder(CMLBond.SINGLE);
+        b2.setOrder(CMLBond.SINGLE_S);
         mol.addBond(b2);
         CMLBond b3 = new CMLBond(a1, a5);
-        b3.setOrder(CMLBond.SINGLE);
+        b3.setOrder(CMLBond.SINGLE_S);
         mol.addBond(b3);
         
         CMLAtomParity atomParity = new CMLAtomParity();//should be S
