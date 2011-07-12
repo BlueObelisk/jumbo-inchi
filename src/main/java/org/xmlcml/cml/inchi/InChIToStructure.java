@@ -144,11 +144,11 @@ public class InChIToStructure implements CMLConstants {
         	
         	INCHI_BOND_TYPE type = iBo.getBondType();
         	if (type == INCHI_BOND_TYPE.SINGLE) {
-        		cBo.setOrder(CMLBond.SINGLE);
+        		cBo.setOrder(CMLBond.SINGLE_S);
         	} else if (type == INCHI_BOND_TYPE.DOUBLE) {
-        		cBo.setOrder(CMLBond.DOUBLE);
+        		cBo.setOrder(CMLBond.DOUBLE_D);
         	} else if (type == INCHI_BOND_TYPE.TRIPLE) {
-        		cBo.setOrder(CMLBond.TRIPLE);
+        		cBo.setOrder(CMLBond.TRIPLE_T);
         	} else if (type == INCHI_BOND_TYPE.ALTERN) {
         		cBo.setOrder(CMLBond.AROMATIC);
         	} else {

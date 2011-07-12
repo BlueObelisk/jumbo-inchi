@@ -354,14 +354,11 @@ public class InChIGenerator implements EuclidConstants, InChIGeneratorInterface 
                 INCHI_BOND_TYPE order;
                 String bo = bond.getOrder();
 
-                if (CMLBond.SINGLE.equals(bo) || CMLBond.SINGLE_S.equals(bo)
-                        || bo == null) {
+                if (CMLBond.isSingle(bo) || bo == null) {
                     order = INCHI_BOND_TYPE.SINGLE;
-                } else if (CMLBond.DOUBLE.equals(bo)
-                        || CMLBond.DOUBLE_D.equals(bo)) {
+                } else if (CMLBond.isDouble(bo)) {
                     order = INCHI_BOND_TYPE.DOUBLE;
-                } else if (CMLBond.TRIPLE.equals(bo)
-                        || CMLBond.TRIPLE_T.equals(bo)) {
+                } else if (CMLBond.isTriple(bo)) {
                     order = INCHI_BOND_TYPE.TRIPLE;
                 } else if (CMLBond.AROMATIC.equals(bo)) {
                     order = INCHI_BOND_TYPE.ALTERN;
