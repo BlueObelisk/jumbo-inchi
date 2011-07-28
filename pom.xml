@@ -9,23 +9,23 @@
 	</parent>
 	<groupId>org.xml-cml</groupId>
 	<artifactId>inchi</artifactId>
-	<name>JNInchi</name>
 	<version>0.1-SNAPSHOT</version>
-	<description>A Java wrapper for inchi</description>
-	<url>http://sourceforge.net/projects/cml/
-	</url>
-	<inceptionYear>1994</inceptionYear>
-	<mailingLists>
-		<mailingList>
-			<name>cml-discuss</name>
-			<subscribe> http://lists.sourceforge.net/mailman/listinfo/cml-cvs
-			</subscribe>
-			<unsubscribe> http://lists.sourceforge.net/mailman/listinfo/cml-cvs
-			</unsubscribe>
-			<archive> http://sourceforge.net/mailarchive/forum.php?forum_id=44193
-			</archive>
-		</mailingList>
-	</mailingLists>
+	<packaging>jar</packaging>
+	<name>JUMBO-InChI</name>
+	<description>A container for JUMBO's InChI functionality</description>
+	<url>https://bitbucket.org/wwmm/jumbo-inchi</url>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://bitbucket.org/wwmm/jumbo-inchi/src</url>
+		<connection>scm:hg:http://bitbucket.org/wwmm/jumbo-inchi</connection>
+		<developerConnection>scm:hg:https://bitbucket.org/wwmm/jumbo-inchi</developerConnection>
+	</scm>
 	<developers>
 		<developer>
 			<id>petermr</id>
@@ -40,23 +40,25 @@
 			<name>David Jessop</name>
 		</developer>
 	</developers>
-	<licenses>
-		<license>
-			<name>Artistic License</name>
-			<url> http://www.opensource.org/licenses/artistic-license.php</url>
-			<distribution>manual</distribution>
-		</license>
-	</licenses>
-	<scm>
-		<url>https://bitbucket.org/wwmm/jumbo-inchi/src</url>
-		<connection>scm:hg:http://bitbucket.org/wwmm/jumbo-inchi</connection>
-		<developerConnection>scm:hg:https://bitbucket.org/wwmm/jumbo-inchi</developerConnection>
-	</scm>
+	
+	<inceptionYear>1994</inceptionYear>
+	<mailingLists>
+		<mailingList>
+			<name>cml-discuss</name>
+			<subscribe> http://lists.sourceforge.net/mailman/listinfo/cml-cvs
+			</subscribe>
+			<unsubscribe> http://lists.sourceforge.net/mailman/listinfo/cml-cvs
+			</unsubscribe>
+			<archive> http://sourceforge.net/mailarchive/forum.php?forum_id=44193
+			</archive>
+		</mailingList>
+	</mailingLists>
 	<organization>
 		<name>Peter Murray-Rust</name>
 		<url>http://wwmm.ch.cam.ac.uk/blogs/murrayrust/
 		</url>
 	</organization>
+	<!-- remove <repositories> for releases to maven central -->
 	<repositories>
 		<repository>
 			<id>ucc-repo</id>
