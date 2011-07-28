@@ -40,7 +40,7 @@
 			<name>David Jessop</name>
 		</developer>
 	</developers>
-	
+
 	<inceptionYear>1994</inceptionYear>
 	<mailingLists>
 		<mailingList>
@@ -100,4 +100,16 @@
 			<version>1.2.5</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<configuration>
+					<header>src/main/resources/header.txt</header>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
