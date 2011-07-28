@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>org.xml-cml</groupId>
 	<artifactId>inchi</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 	<name>JUMBO-InChI</name>
 	<description>A container for JUMBO's InChI functionality</description>
@@ -59,6 +59,7 @@
 		</url>
 	</organization>
 	<!-- remove <repositories> for releases to maven central -->
+	<!--
 	<repositories>
 		<repository>
 			<id>ucc-repo</id>
@@ -66,21 +67,22 @@
 			<url>https://maven.ch.cam.ac.uk/m2repo</url>
 		</repository>
 	</repositories>
+	 -->
 	<dependencies>
 		<dependency>
 			<groupId>org.xml-cml</groupId>
 			<artifactId>euclid</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.xml-cml</groupId>
 			<artifactId>cmlxom</artifactId>
-			<version>3.2-SNAPSHOT</version>
+			<version>3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.xml-cml</groupId>
 			<artifactId>jumbo</artifactId>
-			<version>6.1-SNAPSHOT</version>
+			<version>6.0</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jni-inchi</groupId>
